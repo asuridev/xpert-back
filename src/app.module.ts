@@ -14,7 +14,7 @@ import { MongooseModule } from '@nestjs/mongoose';
      ConfigModule.forRoot({
       isGlobal:true
     }),
-    MongooseModule.forRoot('mongodb://localhost:27017/xpert'),
+    MongooseModule.forRoot(process.env.URL_DATABASE),
     CatsModule,
     ImagesModule,
     SharedModule,

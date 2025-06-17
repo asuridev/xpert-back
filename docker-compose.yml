@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  user-service:
+    depends_on:
+      - db
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: breed-cats-docker
+    container_name: breed-cats-container
+    restart: always # reiniciar el contenedor si se detiene
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+      API_BREEDS: https://api.thecatapi.com/v1/breeds
+      API_IMAGES: https://api.thecatapi.com/v1/images
+      API_TOKEN: live_JBT0Ah0Nt12iyl2IpjQVLDWjcLk0GQwf4zI9wBMfmfejKmcC31mOJp4yJz5TsOUP
+      URL_DATABASE: mongodb://db:27017/xpert
+      JWT_SECRET: tryryrtyryryr533g
+      JWT_TIMEOUT: "2h"
+    # volumes:
+    #   - ./:/var/www/user-db
+
+  db:
+    image: mongo
+    container_name: xpert_db
+    restart: always
+    ports:
+      - 27017:27017
+    
